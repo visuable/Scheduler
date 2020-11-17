@@ -8,17 +8,24 @@ using System.Threading.Tasks;
 
 namespace Scheduler.TestTask
 {
-    class ConcreteTask : ITask
+    class ConcreteTask : Task, IExecutable
     {
-        public DateTime On { get; set; }
+        public ConcreteTask() : base(false, DateTime.Now.AddMinutes(1))
+        {
 
-        public ConcreteTask()
-        {
-            On = DateTime.Now.AddMinutes(1);
         }
-        public async void Execute()
+        public async System.Threading.Tasks.Task Execute()
         {
-            await File.WriteAllTextAsync("отчет.txt", DateTime.Now.ToShortDateString());
+            try
+            {
+                await File.WriteAllTextAsync("отчет.txt", DateTime.Now.ToShortDateString());
+            }
+            catch
+            {
+                Done = false;
+            }
+
+            Done = true;
         }
     }
 }

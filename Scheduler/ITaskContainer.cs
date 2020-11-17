@@ -6,8 +6,8 @@ namespace Scheduler
 {
     interface ITaskContainer
     {
-        void AddNewTask(ITask task);
-        void DeleteTask(ITask task);
-        ITask GetTask(DateTime time);
+        void AddNewTask(Task task);
+        void UpdateTask(Task task);
+        Task GetTask(DateTime time);
     }
 }

@@ -7,23 +7,28 @@ namespace Scheduler
 {
     class HeapTaskContainer : ITaskContainer
     {
-        private readonly SortedList<DateTime, ITask> tasks;
+        private readonly SortedList<DateTime, Task> tasks;
 
         public HeapTaskContainer()
         {
-            tasks = new SortedList<DateTime, ITask>();
+            tasks = new SortedList<DateTime, Task>();
         }
-        public void AddNewTask(ITask task)
+        public void AddNewTask(Task task)
         {
             tasks.Add(task.On, task);
         }
 
-        public void DeleteTask(ITask task)
+        public void UpdateTask(Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTask(Task task)
         {
             tasks.Remove(task.On);
         }
 
-        public ITask GetTask(DateTime time)
+        public Task GetTask(DateTime time)
         {
             var t = tasks.FirstOrDefault(x => x.Key.Date == time.Date &&
                                               x.Key.Hour == time.Hour &&

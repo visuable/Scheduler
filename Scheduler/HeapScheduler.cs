@@ -13,13 +13,13 @@ namespace Scheduler
         {
             this.container = container;
         }
-        public Task Execute()
+        public System.Threading.Tasks.Task Execute()
         {
             while (true)
             {
                 var task = container.GetTask(DateTime.Now);
-                task?.Execute();
-                Task.Delay(500);
+                ((IExecutable)task)?.Execute();
+                System.Threading.Tasks.Task.Delay(500);
             }
         }
 
